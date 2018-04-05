@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  .container
+    .box
+      h1.title.is-uppercase= message
+      h2.subtitle= error.status
+      pre #{error.stack}
