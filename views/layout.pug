@@ -1,0 +1,46 @@
+doctype html
+html
+  head
+    title= `${title} | Doom Blogger`
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(rel="stylesheet" href="/css/lib/bulma.css")
+    link(rel="stylesheet" href="/css/lib/fontawesome-all.min.css")
+    link(rel="stylesheet" href="/css/styles.css")
+  body
+    block header
+      nav.navbar.is-link
+        .navbar-brand
+          a.navbar-item(href="/")
+            span.icon.has-text-light.is-large
+              i.fab.fa-node.fa-3x
+          .navbar-item
+            .field.has-addons
+              .control
+                input.input(type="text", placeholder="Search blogpost...")
+              .control
+                a.button.is-info(href="#") Search
+        .navbar-menu
+          .navbar-end
+            a.navbar-item(href="#")
+              span.icon.has-text-light
+                i.fas.fa-home
+              span Home
+            a.navbar-item(href="#")
+              span.icon.has-text-light
+                i.fas.fa-book
+              span My Posts
+            a.navbar-item(href="#")
+              span.icon.has-text-light
+                i.far.fa-edit
+              span Create Post
+            a.navbar-item(href="#")
+              span.icon.has-text-light
+                i.far.fa-heart
+              span Following
+            a.navbar-item(href="#")
+              span.icon.has-text-light
+                i.far.fa-hand-peace
+              span Logout
+
+    block content
