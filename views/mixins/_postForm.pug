@@ -1,0 +1,13 @@
+mixin postForm()
+  form(action="/posts" method="POST")
+    .field
+      label.label Title
+      .control
+        input.input(type="text" name="title" placeholder="Post Title..")
+    .field
+      label.label Description
+      .control
+        textarea.textarea(name="description" placeholder="Tell more about the post....")
+    .field
+      .control
+        button.button.is-link Submit
