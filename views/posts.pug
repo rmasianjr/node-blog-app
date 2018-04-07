@@ -1,0 +1,11 @@
+extends layout
+
+include mixins/_postCard
+
+block content
+  .container
+    section.section
+      .columns.is-multiline
+        each post in posts
+          .column.is-4-desktop.is-6-tablet.post__try
+            +postCard(post)

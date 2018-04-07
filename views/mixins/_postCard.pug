@@ -1,0 +1,13 @@
+mixin postCard(post = {})
+  .card
+    .card-image
+      figure.image
+        img(src="/uploads/Koala.jpg", alt="random image")
+    .card-content
+      .content
+        h1= post.title
+        p Date created #{post.created}
+        p= post.description
+    .card-footer
+      a.card-footer-item.button.is-info(href="#") Edit
+      a.card-footer-item.button.is-danger(href="#") Delete

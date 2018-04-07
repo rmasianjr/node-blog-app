@@ -1,5 +1,12 @@
 const createError = require('http-errors');
 
+// catch async/await errors in clean way. instead of using try/catch
+exports.catchErrors = fn => {
+  return function(req, res, next) {
+    return fn(req, res, next).catch(next);
+  };
+};
+
 exports.notFound = (req, res, next) => {
   next(createError(404));
 };

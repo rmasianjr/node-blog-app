@@ -1,0 +1,13 @@
+.column {
+  display: flex;
+  align-items: stretch;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-footer {
+  margin-top: auto;
+}
