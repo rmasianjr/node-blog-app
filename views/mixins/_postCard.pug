@@ -2,7 +2,7 @@ mixin postCard(post = {})
   .card
     .card-image
       figure.image
-        img(src="/uploads/Koala.jpg", alt="random image")
+        img(src=`/uploads/${post.image || 'blogpost.jpeg'}`, alt="random image")
     .card-content
       .content
         h1= post.title
