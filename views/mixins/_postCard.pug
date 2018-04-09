@@ -8,6 +8,8 @@ mixin postCard(post = {})
         h1= post.title
         p Date created #{post.created}
         p= post.description
+        p.has-text-right
+          a.button.is-small.is-link.is-outlined(href=`/posts/${post._id}`) Read more..
     .card-footer
       a.card-footer-item.button.is-info(href="#") Edit
       a.card-footer-item.button.is-danger(href="#") Delete

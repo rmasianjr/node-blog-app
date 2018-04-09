@@ -44,3 +44,8 @@ exports.getPosts = async (req, res) => {
   const posts = await Post.find({});
   res.render('posts', { title: 'My Posts', posts });
 };
+
+exports.getSinglePost = async (req, res) => {
+  const post = await Post.findById(req.params.id);
+  res.render('post', { title: post.title, post });
+};

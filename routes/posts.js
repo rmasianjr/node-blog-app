@@ -14,4 +14,6 @@ router.post(
 
 router.get('/', catchErrors(postController.getPosts));
 
+router.get('/:id', catchErrors(postController.getSinglePost));
+
 module.exports = router;

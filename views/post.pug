@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  section.section
+    .container  
+      .content
+        .box
+          figure
+            img(src=`/uploads/${post.image || 'blogpost.jpeg'}`, alt=`${post.title}`)
+          .has-text-centered
+            h1.title.is-3= post.title
+            p 
+              small 
+                em Date created: #{post.created}
+          hr
+          p= post.description
+          p.has-text-right
+            a.button(href="/posts") Back
+
+    
