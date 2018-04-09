@@ -11,5 +11,5 @@ mixin postCard(post = {})
         p.has-text-right
           a.button.is-small.is-link.is-outlined(href=`/posts/${post._id}`) Read more..
     .card-footer
-      a.card-footer-item.button.is-info(href="#") Edit
+      a.card-footer-item.button.is-info(href=`/posts/${post.id}/edit`) Edit
       a.card-footer-item.button.is-danger(href="#") Delete

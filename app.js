@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
 
 const indexRoutes = require('./routes/index');
 const postRoutes = require('./routes/posts');
@@ -14,6 +15,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(methodOverride('_method'));
 
 app.use('/', indexRoutes);
 app.use('/posts', postRoutes);

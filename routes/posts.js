@@ -16,4 +16,12 @@ router.get('/', catchErrors(postController.getPosts));
 
 router.get('/:id', catchErrors(postController.getSinglePost));
 
+router.get('/:id/edit', catchErrors(postController.editPost));
+router.put(
+  '/:id',
+  postController.upload,
+  catchErrors(postController.resize),
+  catchErrors(postController.updatePost)
+);
+
 module.exports = router;

@@ -16,7 +16,7 @@ const multerOptions = {
 };
 
 exports.newPost = (req, res) => {
-  res.render('newPost', { title: 'Create Post' });
+  res.render('editPost', { title: 'Create Post' });
 };
 
 exports.upload = multer(multerOptions).single('image');
@@ -48,4 +48,17 @@ exports.getPosts = async (req, res) => {
 exports.getSinglePost = async (req, res) => {
   const post = await Post.findById(req.params.id);
   res.render('post', { title: post.title, post });
+};
+
+exports.editPost = async (req, res) => {
+  const post = await Post.findById(req.params.id);
+  res.render('editPost', { title: `Edit ${post.title}`, post });
+};
+
+exports.updatePost = async (req, res) => {
+  const post = await Post.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true
+  });
+  res.redirect('back');
 };
