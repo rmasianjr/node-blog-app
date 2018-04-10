@@ -24,4 +24,6 @@ router.put(
   catchErrors(postController.updatePost)
 );
 
+router.delete('/:id', catchErrors(postController.deletePost));
+
 module.exports = router;

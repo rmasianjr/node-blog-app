@@ -62,3 +62,8 @@ exports.updatePost = async (req, res) => {
   });
   res.redirect('back');
 };
+
+exports.deletePost = async (req, res) => {
+  await Post.findByIdAndRemove(req.params.id);
+  res.redirect('/posts');
+};
