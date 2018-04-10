@@ -2,6 +2,9 @@ const Post = require('../models/Post');
 const multer = require('multer');
 const jimp = require('jimp');
 const uuid = require('uuid');
+const { promisify } = require('es6-promisify');
+const fs = require('fs');
+const path = require('path');
 
 const multerOptions = {
   storage: multer.memoryStorage(),
@@ -64,6 +67,11 @@ exports.updatePost = async (req, res) => {
 };
 
 exports.deletePost = async (req, res) => {
-  await Post.findByIdAndRemove(req.params.id);
+  const unlink = promisify(fs.unlink);
+  const post = await Post.findByIdAndRemove(req.params.id);
+  if (post.image) {
+    await unlink(path.join(__dirname, `../public/uploads/${post.image}`));
+  }
+
   res.redirect('/posts');
 };
