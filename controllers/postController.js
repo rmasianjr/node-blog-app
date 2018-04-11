@@ -59,10 +59,18 @@ exports.editPost = async (req, res) => {
 };
 
 exports.updatePost = async (req, res) => {
+  const oldPost = await Post.findById(req.params.id);
+
   const post = await Post.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true
   });
+
+  if (oldPost.image && oldPost.image !== post.image) {
+    const unlink = promisify(fs.unlink);
+    await unlink(path.join(__dirname, `../public/uploads/${oldPost.image}`));
+  }
+
   res.redirect('back');
 };
 
