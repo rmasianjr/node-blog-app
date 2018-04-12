@@ -40,7 +40,11 @@ exports.resize = async (req, res, next) => {
 exports.createPost = async (req, res) => {
   const newPost = new Post(req.body);
   await newPost.save();
-  res.redirect('/posts');
+  req.flash(
+    'success',
+    `Successfully created <strong>${newPost.title}</strong>.`
+  );
+  res.redirect(`/posts/${newPost._id}`);
 };
 
 exports.getPosts = async (req, res) => {
@@ -71,6 +75,13 @@ exports.updatePost = async (req, res) => {
     await unlink(path.join(__dirname, `../public/uploads/${oldPost.image}`));
   }
 
+  req.flash(
+    'success',
+    `Successfully updated <strong>${post.title}</strong>. <a href="/posts/${
+      post._id
+    }">View post</a>`
+  );
+
   res.redirect('back');
 };
 
@@ -81,5 +92,6 @@ exports.deletePost = async (req, res) => {
     await unlink(path.join(__dirname, `../public/uploads/${post.image}`));
   }
 
+  req.flash('success', `Sucessfully deleted <strong>${post.title}</strong>`);
   res.redirect('/posts');
 };

@@ -43,4 +43,16 @@ html
                 i.far.fa-hand-peace
               span Logout
 
+    block messages
+      br
+      .container
+        if locals.messages
+          - const flashCategories = Object.keys(locals.messages)
+          each category in flashCategories
+            each message in locals.messages[category]
+              .message(class=`is-${category}`)
+                .message-body
+                  button.delete.is-pulled-right(onClick="this.parentElement.remove()")
+                  != message
+
     block content
