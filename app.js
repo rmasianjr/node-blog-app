@@ -4,10 +4,13 @@ const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const session = require('express-session');
 const flash = require('connect-flash');
+const passport = require('passport');
 
 const indexRoutes = require('./routes/index');
 const postRoutes = require('./routes/posts');
+const authRoutes = require('./routes/auth');
 const errorHandlers = require('./handlers/errorHandlers');
+require('./handlers/passport');
 const app = express();
 
 app.set('views', path.join(__dirname, 'views'));
@@ -28,6 +31,9 @@ app.use(
   })
 );
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(flash());
 
 app.use((req, res, next) => {
@@ -37,6 +43,7 @@ app.use((req, res, next) => {
 
 app.use('/', indexRoutes);
 app.use('/posts', postRoutes);
+app.use('/auth', authRoutes);
 
 app.use(errorHandlers.notFound);
 
