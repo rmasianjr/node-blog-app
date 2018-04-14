@@ -5,6 +5,8 @@ const methodOverride = require('method-override');
 const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
+const mongoose = require('mongoose');
+const MongoStore = require('connect-mongo')(session);
 
 const indexRoutes = require('./routes/index');
 const postRoutes = require('./routes/posts');
@@ -27,7 +29,8 @@ app.use(
   session({
     secret: process.env.SECRET,
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
   })
 );
 

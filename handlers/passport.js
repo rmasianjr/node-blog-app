@@ -9,7 +9,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser((id, done) => {
   User.findById(id).then(user => {
-    done(null, user.id);
+    done(null, user);
   });
 });
 
@@ -20,20 +20,19 @@ passport.use(
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: '/auth/google/callback'
     },
-    (accessToken, refreshToken, profile, done) => {
+    async (accessToken, refreshToken, profile, done) => {
       // check if user exist already
-      User.findOne({ googleId: profile.id }).then(existingUser => {
-        if (existingUser) {
-          done(null, existingUser);
-        } else {
-          new User({
-            username: profile.displayName,
-            googleId: profile.id
-          })
-            .save()
-            .then(newUser => done(null, newUser));
-        }
-      });
+      const existingUser = await User.findOne({ googleId: profile.id });
+
+      if (existingUser) {
+        done(null, existingUser);
+      } else {
+        const user = await new User({
+          username: profile.displayName,
+          googleId: profile.id
+        }).save();
+        done(null, user);
+      }
     }
   )
 );
