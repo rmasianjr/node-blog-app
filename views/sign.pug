@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  .section
+    .container.has-text-centered
+      .column.is-4-desktop.is-offset-4-desktop.is-6-tablet.is-offset-3-tablet
+        h3.title.has-text-grey= title
+        p.subtitle.has-text-grey= sub
+        .box
+          a.button.is-link.is-outlined(href="/auth/google")
+            span.icon
+              i.fab.fa-google
+            span | #{title} with Google

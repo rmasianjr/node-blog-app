@@ -22,26 +22,36 @@ html
                 a.button.is-info(href="#") Search
         .navbar-menu
           .navbar-end
-            a.navbar-item(href="#")
-              span.icon.has-text-light
-                i.fas.fa-home
-              span Home
-            a.navbar-item(href="/posts")
-              span.icon.has-text-light
-                i.fas.fa-book
-              span My Posts
-            a.navbar-item(href="/posts/new")
-              span.icon.has-text-light
-                i.far.fa-edit
-              span Create Post
-            a.navbar-item(href="#")
-              span.icon.has-text-light
-                i.far.fa-heart
-              span Following
-            a.navbar-item(href="#")
-              span.icon.has-text-light
-                i.far.fa-hand-peace
-              span Logout
+            if user
+              a.navbar-item(href="#")
+                span.icon.has-text-light
+                  i.fas.fa-home
+                span Home
+              a.navbar-item(href="/posts")
+                span.icon.has-text-light
+                  i.fas.fa-book
+                span My Posts
+              a.navbar-item(href="/posts/new")
+                span.icon.has-text-light
+                  i.far.fa-edit
+                span Create Post
+              a.navbar-item(href="#")
+                span.icon.has-text-light
+                  i.far.fa-heart
+                span Following
+              a.navbar-item(href="/auth/logout")
+                span.icon.has-text-light
+                  i.far.fa-hand-peace
+                span Logout
+            else
+              a.navbar-item(href="/auth/signup")
+                span.icon.has-text-light
+                  i.far.fa-hand-peace
+                span Sign up
+              a.navbar-item(href="/auth/signin")
+                span.icon.has-text-light
+                  i.far.fa-hand-peace
+                span Sign in
 
     block messages
       br
