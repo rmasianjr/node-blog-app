@@ -38,6 +38,7 @@ exports.resize = async (req, res, next) => {
 };
 
 exports.createPost = async (req, res) => {
+  req.body.author = req.user._id;
   const newPost = new Post(req.body);
   await newPost.save();
   req.flash(
@@ -48,7 +49,7 @@ exports.createPost = async (req, res) => {
 };
 
 exports.getPosts = async (req, res) => {
-  const posts = await Post.find({});
+  const posts = await Post.find({ author: req.user._id });
   res.render('posts', { title: 'My Posts', posts });
 };
 
@@ -57,18 +58,36 @@ exports.getSinglePost = async (req, res) => {
   res.render('post', { title: post.title, post });
 };
 
-exports.editPost = async (req, res) => {
-  const post = await Post.findById(req.params.id);
+exports.editPost = async (req, res, next) => {
+  const post = await Post.findOne({ _id: req.params.id, author: req.user._id });
+  // if other user tries to manipulate other post, 404 them.
+  if (!post) {
+    next();
+    return;
+  }
+
   res.render('editPost', { title: `Edit ${post.title}`, post });
 };
 
-exports.updatePost = async (req, res) => {
-  const oldPost = await Post.findById(req.params.id);
-
-  const post = await Post.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true
+exports.updatePost = async (req, res, next) => {
+  const oldPost = await Post.findOne({
+    _id: req.params.id,
+    author: req.user._id
   });
+
+  const post = await Post.findOneAndUpdate(
+    { _id: req.params.id, author: req.user._id },
+    req.body,
+    {
+      new: true,
+      runValidators: true
+    }
+  );
+
+  if (!oldPost || !post) {
+    next();
+    return;
+  }
 
   if (oldPost.image && oldPost.image !== post.image) {
     const unlink = promisify(fs.unlink);
@@ -85,9 +104,18 @@ exports.updatePost = async (req, res) => {
   res.redirect('back');
 };
 
-exports.deletePost = async (req, res) => {
+exports.deletePost = async (req, res, next) => {
   const unlink = promisify(fs.unlink);
-  const post = await Post.findByIdAndRemove(req.params.id);
+  const post = await Post.findOneAndRemove({
+    _id: req.params.id,
+    author: sample
+  });
+
+  if (!post) {
+    next();
+    return;
+  }
+
   if (post.image) {
     await unlink(path.join(__dirname, `../public/uploads/${post.image}`));
   }
