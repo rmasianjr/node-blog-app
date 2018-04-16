@@ -58,36 +58,18 @@ exports.getSinglePost = async (req, res) => {
   res.render('post', { title: post.title, post });
 };
 
-exports.editPost = async (req, res, next) => {
-  const post = await Post.findOne({ _id: req.params.id, author: req.user._id });
-  // if other user tries to manipulate other post, 404 them.
-  if (!post) {
-    next();
-    return;
-  }
-
+exports.editPost = async (req, res) => {
+  const post = await Post.findById(req.params.id);
   res.render('editPost', { title: `Edit ${post.title}`, post });
 };
 
-exports.updatePost = async (req, res, next) => {
-  const oldPost = await Post.findOne({
-    _id: req.params.id,
-    author: req.user._id
+exports.updatePost = async (req, res) => {
+  const oldPost = await Post.findById(req.params.id);
+
+  const post = await Post.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true
   });
-
-  const post = await Post.findOneAndUpdate(
-    { _id: req.params.id, author: req.user._id },
-    req.body,
-    {
-      new: true,
-      runValidators: true
-    }
-  );
-
-  if (!oldPost || !post) {
-    next();
-    return;
-  }
 
   if (oldPost.image && oldPost.image !== post.image) {
     const unlink = promisify(fs.unlink);
@@ -106,15 +88,7 @@ exports.updatePost = async (req, res, next) => {
 
 exports.deletePost = async (req, res, next) => {
   const unlink = promisify(fs.unlink);
-  const post = await Post.findOneAndRemove({
-    _id: req.params.id,
-    author: sample
-  });
-
-  if (!post) {
-    next();
-    return;
-  }
+  const post = await Post.findByIdAndRemove(req.params.id);
 
   if (post.image) {
     await unlink(path.join(__dirname, `../public/uploads/${post.image}`));
