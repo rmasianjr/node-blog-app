@@ -11,6 +11,7 @@ const MongoStore = require('connect-mongo')(session);
 const indexRoutes = require('./routes/index');
 const postRoutes = require('./routes/posts');
 const authRoutes = require('./routes/auth');
+const commentRoutes = require('./routes/comments');
 const errorHandlers = require('./handlers/errorHandlers');
 require('./handlers/passport');
 const app = express();
@@ -48,6 +49,7 @@ app.use((req, res, next) => {
 app.use('/', indexRoutes);
 app.use('/posts', postRoutes);
 app.use('/auth', authRoutes);
+app.use('/posts/:id/comments', commentRoutes);
 
 app.use(errorHandlers.notFound);
 

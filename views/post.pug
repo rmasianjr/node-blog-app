@@ -1,5 +1,8 @@
 extends layout
 
+include mixins/_comment
+include mixins/_commentForm
+
 block content
   section.section
     .container  
@@ -16,5 +19,13 @@ block content
           p= post.description
           p.has-text-right
             a.button(href="/posts") Back
-
+          hr
+          
+          .box
+            if user
+              +commentForm(post)
+            
+            each comment in post.comments
+              +comment(comment)     
+      
     

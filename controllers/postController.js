@@ -54,7 +54,7 @@ exports.getPosts = async (req, res) => {
 };
 
 exports.getSinglePost = async (req, res) => {
-  const post = await Post.findById(req.params.id);
+  const post = await Post.findById(req.params.id).populate('comments');
   res.render('post', { title: post.title, post });
 };
 

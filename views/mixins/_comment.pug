@@ -1,0 +1,14 @@
+mixin comment(comment = {})
+  .media
+    figure.media-left
+      p.image.is-64x64
+        img(src=`${comment.author.gravatar}&d=robohash`, alt="user avatar")
+    .media-content
+      p
+        strong #{comment.author.username}
+        br
+        | #{comment.text}
+        br
+        small · #{comment.created}  
+    .media-right
+      button.delete

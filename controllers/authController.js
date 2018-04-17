@@ -12,7 +12,7 @@ exports.signUp = (req, res) => {
 };
 
 exports.authWithGoogle = passport.authenticate('google', {
-  scope: ['profile']
+  scope: ['profile', 'email']
 });
 
 exports.googleRedirect = passport.authenticate('google', {
