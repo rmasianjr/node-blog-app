@@ -1,4 +1,4 @@
-mixin comment(comment = {})
+mixin comment(comment = {}, post = {})
   .media
     figure.media-left
       p.image.is-64x64
@@ -9,6 +9,9 @@ mixin comment(comment = {})
         br
         | #{comment.text}
         br
-        small · #{comment.created}  
-    .media-right
-      button.delete
+        small · #{comment.created}
+
+    if comment.author.equals(user._id)   
+      .media-right
+        form(action=`/posts/${post._id}/comments/${comment._id}?_method=DELETE` method="POST")
+          button.delete

@@ -10,3 +10,20 @@ exports.createComment = async (req, res) => {
   req.flash('success', 'Comment successfully added');
   res.redirect('back');
 };
+
+exports.deleteComment = async (req, res) => {
+  const commentPromise = Comment.findByIdAndRemove(req.params.commentId);
+
+  // remove element, ref to deleted comment
+  const postPromise = Post.findOneAndUpdate(
+    { comments: req.params.commentId },
+    {
+      $pull: { comments: req.params.commentId }
+    }
+  );
+
+  await Promise.all([commentPromise, postPromise]);
+
+  req.flash('success', 'Comment successfully deleted');
+  res.redirect(`/posts/${req.params.id}`);
+};

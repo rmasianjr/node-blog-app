@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const commentSchema = new Schema({
   text: {
     type: String,
-    trim: true
+    trim: true,
+    required: [true, 'Please put some text']
   },
   created: {
     type: Date,

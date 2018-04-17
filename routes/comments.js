@@ -11,4 +11,10 @@ router.post(
   catchErrors(commentController.createComment)
 );
 
+router.delete(
+  '/:commentId',
+  catchErrors(middleware.confirmCommentOwner),
+  catchErrors(commentController.deleteComment)
+);
+
 module.exports = router;
