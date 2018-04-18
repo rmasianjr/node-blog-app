@@ -17,4 +17,16 @@ router.delete(
   catchErrors(commentController.deleteComment)
 );
 
+router.get(
+  '/:commentId/edit',
+  catchErrors(middleware.confirmCommentOwner),
+  catchErrors(commentController.editComment)
+);
+
+router.put(
+  '/:commentId',
+  catchErrors(middleware.confirmCommentOwner),
+  catchErrors(commentController.updateComment)
+);
+
 module.exports = router;

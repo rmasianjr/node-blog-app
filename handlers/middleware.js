@@ -33,7 +33,7 @@ exports.confirmCommentOwner = async (req, res, next) => {
       next();
     } else {
       req.flash('danger', 'You are not allowed to do that!');
-      res.redirect(`/posts/$${req.params.id}`);
+      res.redirect(`/posts/${req.params.id}`);
     }
   } else {
     req.flash('danger', 'You must be signed in to do that!');

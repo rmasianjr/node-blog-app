@@ -1,4 +1,7 @@
 mixin comment(comment = {}, post = {})
+
+  - const commentOwner = user ? comment.author.equals(user._id) : null
+
   .media
     figure.media-left
       p.image.is-64x64
@@ -9,9 +12,12 @@ mixin comment(comment = {}, post = {})
         br
         | #{comment.text}
         br
-        small · #{comment.created}
+        small
+          if commentOwner 
+            a(href=`/posts/${post._id}/comments/${comment._id}/edit`) Edit 
+          | · #{comment.created}
 
-    if comment.author.equals(user._id)   
+    if commentOwner   
       .media-right
         form(action=`/posts/${post._id}/comments/${comment._id}?_method=DELETE` method="POST")
           button.delete

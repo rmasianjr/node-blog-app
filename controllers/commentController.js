@@ -27,3 +27,24 @@ exports.deleteComment = async (req, res) => {
   req.flash('success', 'Comment successfully deleted');
   res.redirect(`/posts/${req.params.id}`);
 };
+
+exports.editComment = async (req, res) => {
+  const comment = await Comment.findById(req.params.commentId);
+  res.render('editComment', {
+    title: 'Edit Comment',
+    comment,
+    postId: req.params.id
+  });
+};
+
+exports.updateComment = async (req, res) => {
+  req.body.author = req.user._id;
+  const comment = await Comment.findByIdAndUpdate(
+    req.params.commentId,
+    req.body,
+    { new: true, runValidators: true }
+  );
+
+  req.flash('success', 'Comment updated');
+  res.redirect(`/posts/${req.params.id}`);
+};
