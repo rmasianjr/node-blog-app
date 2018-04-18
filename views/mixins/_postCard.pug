@@ -10,7 +10,8 @@ mixin postCard(post = {})
         p= post.description
         p.has-text-right
           a.button.is-small.is-link.is-outlined(href=`/posts/${post._id}`) Read more..
-    .card-footer
-      a.card-footer-item.button.is-info(href=`/posts/${post.id}/edit`) Edit
-      form.card-footer-item.is-paddingless(action=`/posts/${post.id}?_method=DELETE` method="POST")
-        button.is-fullwidth.button.is-danger Delete
+    if user && post.author.equals(user._id)
+      .card-footer
+        a.card-footer-item.button.is-info(href=`/posts/${post.id}/edit`) Edit
+        form.card-footer-item.is-paddingless(action=`/posts/${post.id}?_method=DELETE` method="POST")
+          button.is-fullwidth.button.is-danger Delete

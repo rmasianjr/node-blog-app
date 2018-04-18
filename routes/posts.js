@@ -16,6 +16,12 @@ router.post(
 
 router.get('/', catchErrors(postController.getPosts));
 
+router.get(
+  '/myposts',
+  middleware.isLoggedIn,
+  catchErrors(postController.myPosts)
+);
+
 router.get('/:id', catchErrors(postController.getSinglePost));
 
 router.get(

@@ -49,6 +49,11 @@ exports.createPost = async (req, res) => {
 };
 
 exports.getPosts = async (req, res) => {
+  const posts = await Post.find({});
+  res.render('posts', { title: 'All Posts', posts });
+};
+
+exports.myPosts = async (req, res) => {
   const posts = await Post.find({ author: req.user._id });
   res.render('posts', { title: 'My Posts', posts });
 };
