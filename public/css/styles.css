@@ -1,3 +1,15 @@
+.hero--styled {
+  font-family: 'Gugi', cursive;
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(108, 218, 238, 0.2),
+      rgba(66, 175, 194, 0.6)
+    ),
+    url(../uploads/hero-image.jpeg);
+  background-size: cover;
+  background-position: top;
+}
+
 .column {
   /* display: flex; */
   align-items: stretch;

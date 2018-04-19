@@ -1,68 +1,68 @@
 doctype html
 html
   head
-    title= `${title} | Doom Blogger`
+    title= `${title} | Blogger`
     meta(charset="utf-8")
     meta(name="viewport" content="width=device-width, initial-scale=1")
     link(rel="stylesheet" href="/css/lib/bulma.css")
     link(rel="stylesheet" href="/css/lib/fontawesome-all.min.css")
+    link(href="https://fonts.googleapis.com/css?family=Gugi" rel="stylesheet")
     link(rel="stylesheet" href="/css/styles.css")
   body
     block header
-      nav.navbar.is-link
+      nav.navbar.is-primary
         .navbar-brand
           a.navbar-item(href="/")
-            span.icon.has-text-light.is-large
-              i.fab.fa-node.fa-3x
+            span.icon
+              i.fab.fa-blogger-b.fa-2x
           .navbar-item
             .field.has-addons
               .control
-                input.input(type="text", placeholder="Search blogpost...")
+                input.input.is-size-7-mobile(type="text" placeholder="Search blogpost...")
               .control
-                a.button.is-info(href="#") Search
-        .navbar-menu
+                a.button.is-info.is-size-7-mobile(href="#") Search
+          a.navbar-burger.has-text-light
+            span
+            span
+            span
+        .navbar-menu.is-size-7-mobile
           .navbar-end
             if user
               a.navbar-item(href="/posts")
-                span.icon.has-text-light
+                span.icon
                   i.fas.fa-home
                 span Home
               a.navbar-item(href="/posts/myposts")
-                span.icon.has-text-light
+                span.icon
                   i.fas.fa-book
                 span My Posts
               a.navbar-item(href="/posts/new")
-                span.icon.has-text-light
+                span.icon
                   i.far.fa-edit
                 span Create Post
-              a.navbar-item(href="#")
-                span.icon.has-text-light
-                  i.far.fa-heart
-                span Following
               a.navbar-item(href="/auth/logout")
-                span.icon.has-text-light
-                  i.far.fa-hand-peace
+                span.icon
+                  i.fas.fa-sign-out-alt
                 span Logout
             else
               a.navbar-item(href="/auth/signup")
-                span.icon.has-text-light
-                  i.far.fa-hand-peace
-                span Sign up
+                span.icon
+                  i.fas.fa-user-plus
+                span &nbsp; Sign up
               a.navbar-item(href="/auth/signin")
-                span.icon.has-text-light
-                  i.far.fa-hand-peace
-                span Sign in
+                span.icon
+                  i.fas.fa-sign-in-alt
+                span &nbsp; Sign in
 
     block messages
-      br
-      .container
-        if locals.messages
-          - const flashCategories = Object.keys(locals.messages)
-          each category in flashCategories
-            each message in locals.messages[category]
-              .message(class=`is-${category}`)
-                .message-body
-                  button.delete.is-pulled-right(onClick="this.parentElement.remove()")
-                  != message
-
+      if messages && Object.keys(messages).length > 0
+          .container.is-overlay
+            - const flashCategories = Object.keys(messages)
+            each category in flashCategories
+              each message in messages[category]
+                .message(class=`is-${category}`)
+                  .message-body
+                    button.delete.is-pulled-right(onClick="this.parentElement.remove()")
+                    != message
+     
     block content
