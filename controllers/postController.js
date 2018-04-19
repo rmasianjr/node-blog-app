@@ -93,7 +93,11 @@ exports.updatePost = async (req, res) => {
 
 exports.deletePost = async (req, res, next) => {
   const unlink = promisify(fs.unlink);
-  const post = await Post.findByIdAndRemove(req.params.id);
+  const post = await Post.findByIdAndRemove(req.params.id).populate('comments');
+
+  if (post.comments.length > 0) {
+    post.comments.forEach(comment => comment.remove());
+  }
 
   if (post.image) {
     await unlink(path.join(__dirname, `../public/uploads/${post.image}`));
