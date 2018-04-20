@@ -3,11 +3,14 @@ extends layout
 block content
   .section
     .container.has-text-centered
-      .column.is-4-desktop.is-offset-4-desktop.is-6-tablet.is-offset-3-tablet
-        h3.title.has-text-grey= title
-        p.subtitle.has-text-grey= sub
-        .box
-          a.button.is-link.is-outlined(href="/auth/google")
+      .column.is-6.is-offset-3
+        p.title.has-text-primary.has-text-weight-normal.is-size-3-mobile= title
+        p.subtitle.has-text-primary.has-text-weight-light.is-size-5-mobile= sub
+        .box.box--margin-t-big
+          .avatar
+            p.icon.has-text-primary.avatar__icon
+              i.fas.fa-user-circle
+          a.button.is-primary.is-outlined.is-size-7-mobile(href="/auth/google")
             span.icon
               i.fab.fa-google
             span | #{title} with Google

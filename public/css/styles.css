@@ -10,6 +10,23 @@
   background-position: top;
 }
 
+.box--margin-t-big {
+  margin-top: 60px;
+}
+
+.avatar {
+  margin-top: -60px;
+  padding-bottom: 20px;
+}
+
+.avatar__icon {
+  padding: 35px;
+  font-size: 60px;
+  background: white;
+  border-radius: 50%;
+  border: 1px solid #dcdcdc;
+}
+
 .column {
   /* display: flex; */
   align-items: stretch;
@@ -22,4 +39,15 @@
 
 .card-footer {
   margin-top: auto;
+}
+
+@media only screen and (max-width: 768px) {
+  .avatar {
+    margin-top: -45px;
+  }
+
+  .avatar__icon {
+    padding: 25px;
+    font-size: 40px;
+  }
 }
