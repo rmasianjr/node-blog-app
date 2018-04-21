@@ -27,13 +27,7 @@
   border: 1px solid #dcdcdc;
 }
 
-.column {
-  /* display: flex; */
-  align-items: stretch;
-}
-
 .card {
-  display: flex;
   flex-direction: column;
 }
 

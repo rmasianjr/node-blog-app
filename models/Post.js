@@ -23,4 +23,12 @@ const postSchema = new Schema({
   comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
 });
 
+function autopopulate(next) {
+  this.populate('author');
+  next();
+}
+
+postSchema.pre('find', autopopulate);
+postSchema.pre('findOne', autopopulate);
+
 module.exports = mongoose.model('Post', postSchema);

@@ -5,7 +5,8 @@ include mixins/_postCard
 block content
   .container
     section.section
+      p.title.has-text-primary.is-uppercase.is-size-4-mobile= title
       .columns.is-multiline
         each post in posts
-          .column.is-4-desktop.is-6-tablet
+          .column.is-4-desktop.is-6-tablet.is-flex-tablet
             +postCard(post)

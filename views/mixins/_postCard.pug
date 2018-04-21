@@ -1,17 +1,28 @@
 mixin postCard(post = {})
-  .card
+  .card.is-flex.is-size-7-mobile
+    .card-header
+      .card-header-title
+        .media
+          .media-left
+            figure.image.is-48x48
+              img(src=`${post.author.gravatar}&d=robohash`, alt="user avatar" style="border-radius:50%")
+          .media-content
+            p.has-text-primary.is-size-7-mobile= post.author.username
+            p.has-text-weight-light.has-text-grey.is-size-7 · #{post.created}
     .card-image
       figure.image
         img(src=`/uploads/${post.image || 'blogpost.jpeg'}`, alt="random image")
     .card-content
       .content
         h1= post.title
-        p Date created #{post.created}
-        p= post.description
-        p.has-text-right
-          a.button.is-small.is-link.is-outlined(href=`/posts/${post._id}`) Read more..
+        p= post.description.split(' ').slice(0, 20).join(' ')
+        a.button.is-small.is-link.is-outlined(href=`/posts/${post._id}`) Read more..
     if user && post.author.equals(user._id)
       .card-footer
-        a.card-footer-item.button.is-info(href=`/posts/${post.id}/edit`) Edit
+        a.card-footer-item.button.is-info.is(href=`/posts/${post.id}/edit`)
+          span.icon
+            i.fas.fa-pencil-alt
         form.card-footer-item.is-paddingless(action=`/posts/${post.id}?_method=DELETE` method="POST")
-          button.is-fullwidth.button.is-danger Delete
+          button.is-fullwidth.button.is-danger
+            span.icon
+              i.far.fa-trash-alt
