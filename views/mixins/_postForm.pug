@@ -4,19 +4,19 @@ mixin postForm(post = {})
   
   form(action=`${actionPath}` method="POST" enctype="multipart/form-data")
     .field
-      label.label Title
+      label.label.has-text-primary.is-size-7-mobile Title
       .control
-        input.input(type="text" name="title" placeholder="Post Title.." value=post.title)
+        input.input.is-size-7-mobile(type="text" name="title" placeholder="Post Title.." value=post.title required autocomplete="off")
     .field
-      label.label Photo
+      label.label.has-text-primary.is-size-7-mobile Photo
       .control
-        input.input(type="file" name="image" accept="image/gif, image/png, image/jpeg")
+        input.input.is-size-7-mobile(type="file" name="image" accept="image/gif, image/png, image/jpeg")
         if post.image
           img(src=`/uploads/${post.image}`, alt=post.title width=200)
     .field
-      label.label Description
+      label.label.has-text-primary.is-size-7-mobile Description
       .control
-        textarea.textarea(name="description" placeholder="Tell more about the post....")= post.description
+        textarea.textarea.is-size-7-mobile(name="description" placeholder="Tell more about the post....")= post.description
     .field
       .control
-        button.button.is-link Submit
+        button.button.is-primary.is-size-7-mobile Submit

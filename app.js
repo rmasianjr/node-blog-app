@@ -7,6 +7,7 @@ const flash = require('connect-flash');
 const passport = require('passport');
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
+const moment = require('moment');
 
 const indexRoutes = require('./routes/index');
 const postRoutes = require('./routes/posts');
@@ -43,6 +44,7 @@ app.use(flash());
 app.use((req, res, next) => {
   res.locals.messages = req.flash();
   res.locals.user = req.user;
+  res.locals.moment = moment;
   next();
 });
 

@@ -5,4 +5,6 @@ include mixins/_postForm
 block content
   .section
     .container
-      +postForm(post)
+      p.title.has-text-primary.is-uppercase.is-size-4-mobile= title
+      .box
+        +postForm(post)

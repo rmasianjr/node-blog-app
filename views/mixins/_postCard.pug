@@ -8,7 +8,7 @@ mixin postCard(post = {})
               img(src=`${post.author.gravatar}&d=robohash`, alt="user avatar" style="border-radius:50%")
           .media-content
             p.has-text-primary.is-size-7-mobile= post.author.username
-            p.has-text-weight-light.has-text-grey.is-size-7 · #{post.created}
+            p.has-text-weight-light.has-text-grey.is-size-7 · #{moment(post.created).format('MMM D, YYYY')}
     .card-image
       figure.image
         img(src=`/uploads/${post.image || 'blogpost.jpeg'}`, alt="random image")
