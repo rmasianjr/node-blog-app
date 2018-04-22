@@ -4,28 +4,32 @@ include mixins/_comment
 include mixins/_commentForm
 
 block content
-  section.section
-    .container  
-      .content
-        .box
-          figure
-            img(src=`/uploads/${post.image || 'blogpost.jpeg'}`, alt=`${post.title}`)
-          .has-text-centered
-            h1.title.is-3= post.title
-            p 
-              small 
-                em Date created: #{post.created}
-          hr
-          p= post.description
-          p.has-text-right
-            a.button(href="/posts") Back
-          hr
-          
-          .box
+  .section.section--no-padding-LR
+    .container
+      .column.is-10.is-offset-1
+        .box.post.is-size-7-mobile
+          figure.post__avatar.has-text-centered
+            img.post__author-image(src=`${post.author.gravatar}&d=robohash`, alt=`${post.author.username}`)
+          .content
+            .post__title.has-text-centered
+              h1= post.title
+              small Posted on #{moment(post.created).format('MMM D, YYYY')} by 
+                span.has-text-primary #{post.author.username} 
+            figure
+              img.post__image(src=`/uploads/${post.image || 'blogpost.jpeg'}`, alt=`${post.title}`)
+            .post__body
+              p= post.description
+            hr
+            .post__footer.has-text-right
+              a.button.is-size-7-mobile(href="/posts") Back
+        .box.is-size-7-mobile
+          .content
+            h4 Comments
+            hr
+            
             if user
               +commentForm(post)
             
             each comment in post.comments
-              +comment(comment, post)     
-      
+              +comment(comment, post)
     

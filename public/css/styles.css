@@ -40,6 +40,20 @@ body {
   margin-top: auto;
 }
 
+/* single post */
+
+.post__avatar {
+  margin-top: -60px;
+  padding-bottom: 20px;
+}
+
+.post__author-image {
+  padding: 5px;
+  background: #fff;
+  border-radius: 50%;
+  border: 2px solid #dcdcdc;
+}
+
 @media only screen and (max-width: 768px) {
   .avatar {
     margin-top: -45px;
@@ -48,5 +62,25 @@ body {
   .avatar__icon {
     padding: 25px;
     font-size: 40px;
+  }
+
+  .post__avatar {
+    margin-top: -50px;
+  }
+
+  .post__author-image {
+    padding: 0;
+    width: 60px;
+  }
+
+  .post__image {
+    width: 400px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .section--no-padding-LR {
+    padding-left: 0;
+    padding-right: 0;
   }
 }

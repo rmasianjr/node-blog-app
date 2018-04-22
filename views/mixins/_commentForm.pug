@@ -1,13 +1,13 @@
 mixin commentForm(post)
   .media
     figure.media-left
-      p.image
+      p.image.is-48x48
         img(src=`${user.gravatar}&d=robohash`, alt="user avatar")
     .media-content
       form(action=`/posts/${post._id}/comments` method="POST")
         .field
           .control
-            textarea.textarea(name="text" placeholder="Add a comment...")
+            textarea.textarea.is-size-7-mobile(name="text" placeholder="Add a comment..." required)
         .field
           .control
-            button.button.is-info Post comment
+            button.button.is-info.is-size-7-mobile Post comment

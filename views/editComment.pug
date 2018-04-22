@@ -1,22 +1,24 @@
 extends layout 
 
 block content
-  .section
+  .section.section--no-padding-LR
     .container
-    .column.is-8.is-offset-2
-        p.title Edit comment
-        .box
-          .media
-            figure.media-left
-              p.image
-                img(src=`${user.gravatar}&d=robohash`, alt="user avatar")
-            .media-content
-              form(action=`/posts/${postId}/comments/${comment._id}?_method=PUT` method="POST")
-                .field
-                  .control
-                    textarea.textarea(name="text")= comment.text
-                .field
-                  .control
-                    button.button.is-info Update comment
-            .media-right
-              a.button.is-small(href=`/posts/${postId}`) Cancel
+      .column.is-8.is-offset-2
+          p.title.has-text-primary.is-uppercase.is-size-4-mobile Edit comment
+          .box
+            .media
+              figure.media-left
+                p.image.is-48x48
+                  img(src=`${user.gravatar}&d=robohash`, alt="user avatar")
+              .media-content
+                form(action=`/posts/${postId}/comments/${comment._id}?_method=PUT` method="POST")
+                  .field
+                    .control
+                      textarea.textarea(name="text")= comment.text
+                  .level.is-mobile
+                    .level-left
+                      .level-item
+                        button.button.is-info.is-size-7-mobile Update
+                    .level-right
+                      .level-item
+                        a.button.is-size-7-mobile(href=`/posts/${postId}`) Cancel

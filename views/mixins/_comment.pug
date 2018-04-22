@@ -4,7 +4,7 @@ mixin comment(comment = {}, post = {})
 
   .media
     figure.media-left
-      p.image.is-64x64
+      p.image.is-48x48
         img(src=`${comment.author.gravatar}&d=robohash`, alt="user avatar")
     .media-content
       p
@@ -15,7 +15,7 @@ mixin comment(comment = {}, post = {})
         small
           if commentOwner 
             a(href=`/posts/${post._id}/comments/${comment._id}/edit`) Edit 
-          | · #{comment.created}
+          | · #{moment(comment.created).fromNow()}
 
     if commentOwner   
       .media-right
