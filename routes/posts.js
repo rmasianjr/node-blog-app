@@ -43,4 +43,7 @@ router.delete(
   catchErrors(postController.deletePost)
 );
 
+/* search */
+router.post('/search', catchErrors(postController.searchPost));
+
 module.exports = router;

@@ -16,11 +16,12 @@ html
             span.icon
               i.fab.fa-blogger-b.fa-2x
           .navbar-item
-            .field.has-addons
-              .control
-                input.input.is-size-7-mobile(type="text" placeholder="Search blogpost...")
-              .control
-                a.button.is-info.is-size-7-mobile(href="#") Search
+            form(action="/posts/search" method="POST")
+              .field.has-addons
+                .control
+                  input.input.is-size-7-mobile(type="text" name="text" placeholder="Search blogpost..." required)
+                .control
+                  button.button.is-info.is-size-7-mobile Search
           a.navbar-burger.has-text-light
             span
             span
@@ -60,7 +61,7 @@ html
             - const flashCategories = Object.keys(messages)
             each category in flashCategories
               each message in messages[category]
-                .message(class=`is-${category}`)
+                .message(class=`is-${category}`).is-size-7-mobile
                   .message-body
                     button.delete.is-pulled-right(onClick="this.parentElement.remove()")
                     != message

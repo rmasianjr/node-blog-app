@@ -106,3 +106,27 @@ exports.deletePost = async (req, res, next) => {
   req.flash('success', `Sucessfully deleted <strong>${post.title}</strong>`);
   res.redirect('/posts');
 };
+
+exports.searchPost = async (req, res) => {
+  const text = req.body.text;
+  if (!text.trim()) {
+    res.redirect('back');
+    return;
+  }
+
+  const posts = await Post.find(
+    { $text: { $search: text } },
+    { score: { $meta: 'textScore' } }
+  ).sort({ score: { $meta: 'textScore' } });
+
+  if (posts.length < 1) {
+    req.flash(
+      'danger',
+      `No post(s) related to <strong>${text}</strong> was found!`
+    );
+    res.redirect('/posts');
+    return;
+  }
+
+  res.render('posts', { title: `Search result(s) for ${text}`, posts });
+};

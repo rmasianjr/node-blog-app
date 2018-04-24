@@ -23,6 +23,11 @@ const postSchema = new Schema({
   comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
 });
 
+postSchema.index({
+  title: 'text',
+  description: 'text'
+});
+
 function autopopulate(next) {
   this.populate('author');
   next();
