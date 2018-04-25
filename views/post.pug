@@ -16,7 +16,8 @@ block content
               small Posted on #{moment(post.created).format('MMM D, YYYY')} by 
                 span.has-text-primary #{post.author.username} 
             figure
-              img.post__image(src=`/uploads/${post.image || 'blogpost.jpeg'}`, alt=`${post.title}`)
+              - const imageSrc = post.image ? `/uploads/${post.image}` : '/img/blogpost.jpeg'
+              img.post__image(src=imageSrc alt=`${post.title}`)
             .post__body
               p= post.description
             hr
@@ -24,7 +25,7 @@ block content
               a.button.is-size-7-mobile(href="/posts") Back
         .box.is-size-7-mobile
           .content
-            h4 Comments
+            h4.has-text-weight-normal Comments
             hr
             
             if user

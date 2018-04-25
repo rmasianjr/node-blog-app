@@ -4,11 +4,11 @@ html
     title= `${title} | Blogger`
     meta(charset="utf-8")
     meta(name="viewport" content="width=device-width, initial-scale=1")
-    link(rel="stylesheet" href="/css/lib/bulma.css")
+    link(rel="stylesheet" href="/css/lib/bulma.min.css")
     link(rel="stylesheet" href="/css/lib/fontawesome-all.min.css")
     link(href="https://fonts.googleapis.com/css?family=Gugi" rel="stylesheet")
     link(rel="stylesheet" href="/css/styles.css")
-  body
+  body.has-background-white-ter
     block header
       nav.navbar.is-primary
         .navbar-brand
@@ -62,7 +62,7 @@ html
             each category in flashCategories
               each message in messages[category]
                 .message(class=`is-${category}`).is-size-7-mobile
-                  .message-body
+                  .message-body.message-body--bordered
                     button.delete.is-pulled-right(onClick="this.parentElement.remove()")
                     != message
      

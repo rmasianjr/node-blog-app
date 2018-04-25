@@ -11,10 +11,11 @@ mixin postCard(post = {})
             p.has-text-weight-light.has-text-grey.is-size-7 · #{moment(post.created).format('MMM D, YYYY')}
     .card-image
       figure.image
-        img(src=`/uploads/${post.image || 'blogpost.jpeg'}`, alt="random image")
+        - const imageSrc = post.image ? `/uploads/${post.image}` : '/img/blogpost.jpeg'
+        img(src=imageSrc alt=post.title)
     .card-content
       .content
-        h1= post.title
+        h1.has-text-weight-normal= post.title
         p= post.description.split(' ').slice(0, 20).join(' ')
         a.button.is-small.is-link.is-outlined(href=`/posts/${post._id}`) Read more..
     if user && post.author.equals(user._id)
