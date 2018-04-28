@@ -2,6 +2,10 @@ body {
   min-height: 100vh;
 }
 
+.navbar-item--text-styled {
+  font-family: 'Gugi', cursive;
+}
+
 .message-body--bordered {
   border: 1px solid #dbdbdb;
 }
