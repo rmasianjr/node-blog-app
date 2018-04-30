@@ -1,5 +1,5 @@
 mixin postCard(post = {})
-  .card.is-flex.is-size-7-mobile
+  .card.is-flex
     .card-header
       .card-header-title
         .media
@@ -7,7 +7,7 @@ mixin postCard(post = {})
             figure.image.is-48x48
               img(src=`${post.author.gravatar}&d=robohash`, alt="user avatar" style="border-radius:50%")
           .media-content
-            p.has-text-primary.is-size-7-mobile= post.author.username
+            p.has-text-primary= post.author.username
             p.has-text-weight-light.has-text-grey.is-size-7 · #{moment(post.created).format('MMM D, YYYY')}
     .card-image
       figure.image
@@ -15,7 +15,7 @@ mixin postCard(post = {})
         img(src=imageSrc alt=post.title)
     .card-content
       .content
-        h1.has-text-weight-normal= post.title
+        h2.has-text-weight-normal= post.title
         p= post.description.split(' ').slice(0, 20).join(' ')
         a.button.is-small.is-link.is-outlined(href=`/posts/${post._id}`) Read more..
     if user && post.author.equals(user._id)

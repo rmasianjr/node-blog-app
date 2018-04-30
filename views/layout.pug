@@ -12,14 +12,14 @@ html
     block header
       nav.navbar.is-primary
         .navbar-brand
-          a.navbar-item.navbar-item--text-styled.is-size-4-tablet.is-uppercase.has-text-weight-bold(href="/") SP
-          .navbar-item
+          a.navbar-item.navbar-item--text-styled.navbar-item--no-padding-TB.is-size-4-mobile.is-size-3-tablet.is-uppercase.has-text-weight-bold(href="/") SP
+          .navbar-item.navbar-item--shrink
             form(action="/posts/search" method="POST")
               .field.has-addons
                 .control
-                  input.input.is-size-7-mobile(type="text" name="text" placeholder="Search blogpost..." required)
+                  input.input(type="text" name="text" placeholder="Search blogpost..." required)
                 .control
-                  button.button.is-info.is-size-7-mobile
+                  button.button.is-info
                     span.icon
                       i.fab.fa-sistrix
           a.navbar-burger.has-text-light

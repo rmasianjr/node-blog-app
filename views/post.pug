@@ -7,7 +7,7 @@ block content
   .section.section--no-padding-LR
     .container
       .column.is-10.is-offset-1
-        .box.post.is-size-7-mobile
+        .box.post
           figure.post__avatar.has-text-centered
             img.post__author-image(src=`${post.author.gravatar}&d=robohash`, alt=`${post.author.username}`)
           .content
@@ -15,7 +15,7 @@ block content
               h1= post.title
               small Posted on #{moment(post.created).format('MMM D, YYYY')} by 
                 span.has-text-primary #{post.author.username} 
-            figure
+            figure.post__figure
               - const imageSrc = post.image ? `/uploads/${post.image}` : '/img/blogpost.jpeg'
               img.post__image(src=imageSrc alt=`${post.title}`)
             .post__body
@@ -23,7 +23,7 @@ block content
             hr
             .post__footer.has-text-right
               a.button.is-size-7-mobile(href="/posts") Back
-        .box.is-size-7-mobile
+        .box
           .content
             h4.has-text-weight-normal Comments
             hr

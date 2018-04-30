@@ -7,7 +7,7 @@ mixin commentForm(post)
       form(action=`/posts/${post._id}/comments` method="POST")
         .field
           .control
-            textarea.textarea.is-size-7-mobile(name="text" placeholder="Add a comment..." required)
+            textarea.textarea(name="text" placeholder="Add a comment..." required)
         .field
           .control
             button.button.is-info.is-size-7-mobile Post comment

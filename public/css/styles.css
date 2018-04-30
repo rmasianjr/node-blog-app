@@ -6,6 +6,15 @@ body {
   font-family: 'Gugi', cursive;
 }
 
+.navbar-item--shrink {
+  flex-shrink: 1;
+}
+
+.navbar-item--no-padding-TB {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
 .message-body--bordered {
   border: 1px solid #dbdbdb;
 }
@@ -89,5 +98,13 @@ body {
   .section--no-padding-LR {
     padding-left: 0;
     padding-right: 0;
+  }
+
+  .content .post__figure {
+    margin: auto 0;
+  }
+
+  .content .media-left {
+    margin-left: 0;
   }
 }
