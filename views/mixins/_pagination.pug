@@ -1,0 +1,21 @@
+mixin pagination(page, pages)
+
+  - const linkPath = title === 'All Posts' ? '/posts/page/' : '/posts/myposts/page/'
+
+  .pagination.is-size-7-mobile
+    if page > 1
+      a.pagination-previous(href=`${linkPath}${page - 1}`)
+        p
+          span.icon
+            i.fas.fa-chevron-left
+          | Prev
+    if page < pages
+      a.pagination-next(href=`${linkPath}${parseFloat(page) + 1}`)
+        p Next
+          span.icon
+            i.fas.fa-chevron-right
+    if pages > 1
+      ul.pagination-list
+        - for(let i = 1; i <= pages; i++)  
+          li
+            a.pagination-link(href=`${linkPath}${i}`)= i

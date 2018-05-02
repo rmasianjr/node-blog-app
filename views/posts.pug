@@ -1,6 +1,7 @@
 extends layout
 
 include mixins/_postCard
+include mixins/_pagination
 
 block content
   .container
@@ -10,3 +11,4 @@ block content
         each post in posts
           .column.is-4-desktop.is-6-tablet.is-flex-tablet
             +postCard(post)
+      +pagination(page, pages)

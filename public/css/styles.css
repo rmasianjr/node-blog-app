@@ -92,6 +92,11 @@ body {
   .post__image {
     width: 400px;
   }
+
+  .pagination-previous,
+  .pagination-next {
+    flex-grow: 0;
+  }
 }
 
 @media only screen and (max-width: 480px) {

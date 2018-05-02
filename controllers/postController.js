@@ -48,14 +48,37 @@ exports.createPost = async (req, res) => {
   res.redirect(`/posts/${newPost._id}`);
 };
 
+const paginate = (page, limit, query = {}) => {
+  const skip = page * limit - limit;
+
+  const postsPromise = Post.find(query)
+    .skip(skip)
+    .limit(limit)
+    .sort({ created: 'desc' });
+
+  const countPromise = Post.count(query);
+
+  return [postsPromise, countPromise];
+};
+
 exports.getPosts = async (req, res) => {
-  const posts = await Post.find({});
-  res.render('posts', { title: 'All Posts', posts });
+  const page = req.params.page || 1;
+  const limit = 6;
+  const promiseArray = paginate(page, limit);
+  const [posts, count] = await Promise.all(promiseArray);
+  const pages = Math.ceil(count / limit);
+
+  res.render('posts', { title: 'All Posts', posts, page, pages });
 };
 
 exports.myPosts = async (req, res) => {
-  const posts = await Post.find({ author: req.user._id });
-  res.render('posts', { title: 'My Posts', posts });
+  const page = req.params.page || 1;
+  const limit = 6;
+  const promiseArray = paginate(page, limit, { author: req.user._id });
+  const [posts, count] = await Promise.all(promiseArray);
+  const pages = Math.ceil(count / limit);
+
+  res.render('posts', { title: 'My Posts', posts, page, pages });
 };
 
 exports.getSinglePost = async (req, res) => {

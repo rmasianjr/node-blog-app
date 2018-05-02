@@ -16,8 +16,16 @@ router.post(
 
 router.get('/', catchErrors(postController.getPosts));
 
+router.get('/page/:page', catchErrors(postController.getPosts));
+
 router.get(
   '/myposts',
+  middleware.isLoggedIn,
+  catchErrors(postController.myPosts)
+);
+
+router.get(
+  '/myposts/page/:page',
   middleware.isLoggedIn,
   catchErrors(postController.myPosts)
 );
