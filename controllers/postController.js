@@ -68,6 +68,11 @@ exports.getPosts = async (req, res) => {
   const [posts, count] = await Promise.all(promiseArray);
   const pages = Math.ceil(count / limit);
 
+  if (!posts.length) {
+    res.render('noPosts', { title: 'All Posts' });
+    return;
+  }
+
   res.render('posts', { title: 'All Posts', posts, page, pages });
 };
 
@@ -77,6 +82,11 @@ exports.myPosts = async (req, res) => {
   const promiseArray = paginate(page, limit, { author: req.user._id });
   const [posts, count] = await Promise.all(promiseArray);
   const pages = Math.ceil(count / limit);
+
+  if (!posts.length) {
+    res.render('noPosts', { title: 'My Posts' });
+    return;
+  }
 
   res.render('posts', { title: 'My Posts', posts, page, pages });
 };

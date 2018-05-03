@@ -18,6 +18,10 @@ mixin postCard(post = {})
         h2.has-text-weight-normal= post.title
         p= post.description.split(' ').slice(0, 20).join(' ')
         a.button.is-small.is-link.is-outlined(href=`/posts/${post._id}`) Read more..
+        small.is-pulled-right
+          | #{post.comments.length}
+          span.icon
+            i.far.fa-comments
     if user && post.author.equals(user._id)
       .card-footer
         a.card-footer-item.button.is-info.is(href=`/posts/${post.id}/edit`)

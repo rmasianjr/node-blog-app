@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  .section  
+    .container.has-text-centered
+      column.is-6.is-offset-3
+        figure
+          img(src="/img/noposts.png", alt="A squirrel reading empty book")
+        p.title.is-size-4-mobile No posts yet!
+
+        if user && title === 'All Posts'
+          p.subtitle.is-size-6-mobile start 
+            a(href="/posts/new") writing...
+        else if user && title === 'My Posts'
+          p.subtitle.is-size-6-mobile
+            a(href="/posts/new") write.. 
+            | your first post.
+        else
+          p.subtitle.is-size-6-mobile  
+            a(href="/auth/signup") sign up 
+            | or 
+            a(href="/auth/signin") sign in 
+            | and start writing a post 
